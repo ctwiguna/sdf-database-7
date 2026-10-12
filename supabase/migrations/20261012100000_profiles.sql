@@ -5,7 +5,7 @@
 -- ==============================================================================
 
 create table if not exists public.profiles (
-  id uuid primary key references auth.users (id) on delete cascade,
+  id uuid primary key references auth.users (id) on delete cascade deferrable initially deferred,
   role text not null default 'student' check (role in ('student', 'mentor', 'admin')),
   display_name text not null default '',
   created_at timestamptz not null default now(),
