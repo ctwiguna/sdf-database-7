@@ -151,3 +151,12 @@ vite.config.ts.timestamp-*
 # Expo
 .expo/
 web-build/
+
+# Proyek native hasil expo prebuild
+/android
+/ios
+
+# Hasil build
+*.apk
+*.aab
+*.keystore
