@@ -54,9 +54,7 @@ where not exists (
 );
 
 -- ---------------------------------------------------------
--- 3. Seed 8 lessons.
--- NOTE: video IDs mirror mockCourses.ts and are placeholders.
--- Replace with reviewed, permission-verified videos.
+-- 3. Seed 8 lessons using 8 distinct YouTube video IDs.
 -- ---------------------------------------------------------
 insert into public.lessons
   (module_id, course_id, title, position, youtube_video_id)
