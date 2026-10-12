@@ -15,9 +15,10 @@
     "apk:local": "expo prebuild --platform android --no-install && cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
-    "@expo/vector-icons": "^14.1.0",
+    "@expo/vector-icons": "^15.0.3",
     "@supabase/supabase-js": "^2.58.0",
     "expo": "~54.0.28",
+    "expo-font": "~14.0.12",
     "expo-status-bar": "~3.0.8",
     "expo-web-browser": "~15.0.8",
     "react": "19.1.0",

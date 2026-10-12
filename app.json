@@ -6,8 +6,19 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "splash": { "resizeMode": "contain", "backgroundColor": "#E7E7E7" },
-    "android": { "package": "com.futureskill.app" },
-    "web": { "bundler": "metro", "output": "static" }
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#E7E7E7"
+    },
+    "android": {
+      "package": "com.futureskill.app"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
