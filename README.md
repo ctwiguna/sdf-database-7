@@ -1,16 +1,61 @@
 # Future Skill
 
-Future Skill adalah MVP LMS mobile untuk pembelajaran melalui playlist video YouTube unlisted, silabus terurut, dan progres belajar.
+Future Skill is a mobile learning platform for practical future skills. The MVP helps students follow structured video courses, track their learning progress, and continue learning from the first unfinished lesson. Mentors curate course materials, while admins publish courses and monitor course progress.
 
-## Bagian Chandra
+## Product overview
 
-Fondasi React Native dengan Expo, katalog empat course, detail course, playlist terurut, pemutar YouTube, progres lokal untuk fallback demo, design tokens, dan Supabase client berbasis environment.
+The first course catalog focuses on four practical areas:
 
-Fitur tugas, submission, penilaian, chat, pembayaran, sertifikat, dan upload video belum termasuk scope milestone ini.
+1. Solar panel installation and maintenance
+2. Plumbing
+3. EV charging station installation and maintenance
+4. Electric car and motorcycle maintenance
 
-## Menjalankan aplikasi
+Each course uses an ordered syllabus with modules and lessons. Lessons are delivered through YouTube unlisted videos. Students can enroll in a published course, open lessons in syllabus order, mark lessons as completed, and view course progress.
 
-Requirements: Node.js 20 atau lebih baru.
+The MVP does not include task uploads, submissions, grading, quizzes, certificates, payments, chat, push notifications, offline downloads, video uploads, or iOS release.
+
+## User roles
+
+### Student
+
+Students browse published courses, enroll in a course, watch the ordered lesson playlist, mark lessons as completed, and view their progress.
+
+### Mentor
+
+Mentors curate draft course modules and lessons, maintain the syllabus order, provide video references, and monitor progress for students enrolled in their courses.
+
+### Admin
+
+Admins manage course publication, assign mentors, configure course capacity, and view progress reports.
+
+## Technology
+
+1. React Native with Expo and TypeScript
+2. Supabase Auth and PostgreSQL
+3. YouTube unlisted videos for lesson content
+4. React Native WebView for the embedded video player
+5. Supabase Row Level Security for data access control
+
+The current app can run with local demo data. Supabase integration is prepared through environment variables and will be connected to the database migrations as the team completes each module.
+
+## Project structure
+
+```text
+App.tsx                       Main mobile application flow
+src/data/mockCourses.ts       Local course and syllabus data
+src/lib/course.ts             Course ordering and progress helpers
+src/lib/supabase.ts           Supabase client configuration
+src/theme.ts                  Shared design tokens
+src/types.ts                  Shared TypeScript types
+src/__tests__/course.test.ts  Course and progress tests
+app.json                      Expo application configuration
+.env.example                  Environment variable template
+```
+
+## Running the application
+
+Requirements: Node.js 20 or newer.
 
 ```bash
 npm install
@@ -18,17 +63,33 @@ cp .env.example .env
 npm start
 ```
 
-Aplikasi dapat berjalan menggunakan data demo lokal. Jika environment Supabase diisi, client tersedia untuk integrasi query berikutnya.
+The app can be opened with Expo Go on an Android device or emulator. The local demo data allows the main student flow to run without Supabase credentials.
 
-## Verifikasi
+## Environment variables
+
+Copy `.env.example` to `.env` and replace the placeholder values when a Supabase project is available:
+
+```text
+EXPO_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+EXPO_PUBLIC_SUPABASE_ANON_KEY=your-publishable-key
+```
+
+Never put a Supabase service role key, password, or other private secret in the mobile application or in the repository.
+
+## Verification commands
 
 ```bash
 npm run typecheck
+npm test
 npm run export
 ```
 
-Video pada `src/data/mockCourses.ts` adalah placeholder pengembangan. Ganti dengan video milik sendiri atau video yang sudah memperoleh izin sebelum demo.
+The export command creates Android and iOS JavaScript bundles. An APK build and testing on a physical Android device are still required before the final demo.
+
+## Content note
+
+The video IDs in `src/data/mockCourses.ts` are development placeholders. Replace them with videos owned by the team or videos with documented permission before the course is published or demonstrated.
 
 ## AI usage
 
-Bagian ini diperbarui sampai rilis final. Pada milestone ini asisten AI (Hermes Agent) dipakai untuk menyusun struktur proyek, komponen antarmuka, helper progres, dan test unit. Keputusan scope, kurasi materi, data course, dan verifikasi akhir dijalankan tim. Setiap anggota wajib dapat menjelaskan bagian yang ia kerjakan saat Q&A.
+AI tools are used to help with project scaffolding, interface components, course and progress helpers, and unit tests. The team makes the product decisions, curates course materials, verifies the application, and remains responsible for understanding every submitted change.
