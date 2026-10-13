@@ -1,4 +1,4 @@
-# Pembagian Kerja & Todolist Anggota — Future Skill
+# Pembagian Kerja dan Todolist Anggota Future Skill
 
 Sesuai Product Requirements Document (PRD Bagian 7) dan kesepakatan kelompok:
 
@@ -11,7 +11,7 @@ Sesuai Product Requirements Document (PRD Bagian 7) dan kesepakatan kelompok:
 - [x] Migration `activity_logs`: pencatatan audit trail atomik (`enrolled` & `lesson_completed`) dan policy RLS.
 - [x] Stored Procedure RPC `enroll_course`: row-level locking (`SELECT ... FOR UPDATE`), verifikasi status `published`, verifikasi kuota, dan transaksi atomik.
 - [x] Test SQL komprehensif (`supabase/tests/enroll_course.test.sql`): verifikasi peran, idempotensi, kapasitas, RLS, dan rollback saat log gagal.
-- [x] Catatan tiga wawancara nyata calon pengguna (Student, Mentor, Admin) di `docs/CATATAN_WAWANCARA.md`.
+- [ ] Catatan tiga wawancara nyata calon pengguna (Student, Mentor, Admin), disimpan tim di luar repo dan disusulkan setelah sesi wawancara.
 
 ## 2. Kevin | `KenonymouszzZ` (Katalog & Kurikulum)
 - [ ] Migration katalog: `courses`, `course_modules`, dan `lessons`.
