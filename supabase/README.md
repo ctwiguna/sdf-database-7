@@ -26,3 +26,27 @@ psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f supabase/tests/lesson_progress.test.s
 ```
 
 Hasil yang diharapkan: semua baris `OK` tercetak dan baris terakhir `SEMUA UJI LESSON_PROGRESS LULUS`.
+
+
+
+# Course catalog: seed and publishing
+
+The existing seed migration targets four draft courses, four modules, and
+eight lessons. It does not assign `mentor_id`; the current lesson seed repeats
+video IDs, so it does not yet meet an eight-unique-video requirement.
+
+Before publishing:
+1. Select a real mentor and use that account's `public.profiles.id`.
+2. Assign the mentor UUID to the intended course rows.
+3. Verify the topic and availability of each YouTube video; update existing
+   lesson rows with distinct, verified video IDs where required.
+4. Ensure each course has at least one lesson.
+5. As an authenticated admin, call `public.publish_course(course_uuid)`.
+
+Example only; replace with a real UUID and run as admin:
+
+```sql
+select public.publish_course('REPLACE-WITH-REAL-COURSE-UUID'::uuid);
+```
+
+Do not invent mentor UUIDs or publish lessons before verifying the videos.
