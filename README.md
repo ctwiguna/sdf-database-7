@@ -37,18 +37,23 @@ Admins manage course publication, assign mentors, configure course capacity, and
 4. React Native WebView for the embedded video player
 5. Supabase Row Level Security for data access control
 
-The current app can run with local demo data. Supabase integration is prepared through environment variables and will be connected to the database migrations as the team completes each module.
+The app reads the published catalog from Supabase when environment variables are set. Without credentials, or when the database is unreachable or empty, the app falls back to local demo data so the student flow keeps working.
 
 ## Project structure
 
 ```text
 App.tsx                       Main mobile application flow
 src/data/mockCourses.ts       Local course and syllabus data
+src/lib/catalog.ts            Supabase data access for catalog, enrollment, and progress
+src/lib/session.ts            Email sign in, sign up, and validation helpers
 src/lib/course.ts             Course ordering and progress helpers
-src/lib/supabase.ts           Supabase client configuration
+src/lib/supabase.ts           Supabase client and session storage configuration
+src/screens/AccountScreen.tsx Account form and connection status
 src/theme.ts                  Shared design tokens
 src/types.ts                  Shared TypeScript types
 src/__tests__/course.test.ts  Course and progress tests
+src/__tests__/catalog.test.ts Data access tests with a fake client
+src/__tests__/session.test.ts Session validation and error message tests
 app.json                      Expo application configuration
 .env.example                  Environment variable template
 ```
@@ -75,6 +80,19 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your-publishable-key
 ```
 
 Never put a Supabase service role key, password, or other private secret in the mobile application or in the repository.
+
+## Supabase integration
+
+When `.env` is filled, the app connects to Supabase:
+
+1. The catalog is read from `courses`, `course_modules`, and `lessons` for published courses.
+2. The "Daftar course" button calls the `enroll_course` RPC, which locks the course row, checks the status and capacity, and writes the enrollment and the activity log in one transaction.
+3. The "Tandai selesai" button calls the `complete_lesson` RPC, and the progress display is read from `lesson_progress`.
+4. Students sign in on the Akun tab with email and password. Enrollment and progress require a signed in student because the database checks `auth.uid()`.
+5. Sessions are stored with AsyncStorage, so a signed in user stays signed in after the app restarts.
+6. If the database is unreachable or the published catalog is empty, the app keeps working with local demo data and explains the fallback on the Akun tab.
+
+Mentor and admin roles are assigned with the Supabase SQL editor, because the profiles trigger rejects role changes that come from the API.
 
 ## Verification commands
 
