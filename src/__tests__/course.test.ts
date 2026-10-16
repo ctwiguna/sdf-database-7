@@ -37,7 +37,13 @@ describe('urutan silabus', () => {
 
   it('memuat empat course dengan silabus masing masing', () => {
     expect(mockCourses).toHaveLength(4);
-    expect(mockCourses.every((item) => orderedLessons(item).length >= 2)).toBe(true);
+    expect(mockCourses.map((item) => item.title)).toEqual([
+      'Instalasi dan Maintenance Solar Panel',
+      'EV Battery Management System',
+      'PEST Control Course',
+      'Mechanical Electrical Plumbing Course',
+    ]);
+    expect(mockCourses.map((item) => orderedLessons(item).length)).toEqual([2, 19, 21, 8]);
   });
 });
 
