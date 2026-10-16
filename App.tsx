@@ -26,6 +26,7 @@ function App() {
   const [enrolled, setEnrolled] = useState<string[]>([]);
   const [progress, setProgress] = useState<ProgressMap>({});
   const [accountBusy, setAccountBusy] = useState(false);
+  const [sessionReady, setSessionReady] = useState(false);
 
   // Sesi pengguna dipasang sekali, lalu enrollment dan progres dibaca dari database.
   const applySession = async (id: string, email: string) => {
@@ -41,9 +42,11 @@ function App() {
   };
 
   // Katalog dibaca dari database bila env terisi, dan jatuh ke data contoh bila gagal.
+  // Nama mentor hanya diminta saat pengguna masuk: tabel profiles tidak terbuka untuk tamu.
   useEffect(() => {
+    if (!sessionReady) return;
     let active = true;
-    loadCatalog(client)
+    loadCatalog(client, { includeMentor: Boolean(user) })
       .then((result) => {
         if (!active) return;
         setCatalog(result.courses);
@@ -54,11 +57,15 @@ function App() {
     return () => {
       active = false;
     };
-  }, [client]);
+  }, [client, sessionReady, user?.id]);
 
   // Sesi tersimpan diambil saat aplikasi dibuka supaya pengguna tidak perlu masuk ulang.
+  // Penanda sessionReady menjaga katalog membaca data dengan peran yang sudah pasti.
   useEffect(() => {
-    if (!client?.auth) return;
+    if (!client?.auth) {
+      setSessionReady(true);
+      return;
+    }
     let active = true;
     client.auth
       .getSession()
@@ -67,7 +74,10 @@ function App() {
         if (!active || !session?.user) return;
         void applySession(session.user.id, session.user.email ?? '');
       })
-      .catch(() => undefined);
+      .catch(() => undefined)
+      .finally(() => {
+        if (active) setSessionReady(true);
+      });
     return () => {
       active = false;
     };

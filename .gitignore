@@ -160,3 +160,7 @@ web-build/
 *.apk
 *.aab
 *.keystore
+
+# Supabase CLI local state
+supabase/.branches/
+supabase/.temp/

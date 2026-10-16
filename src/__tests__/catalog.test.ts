@@ -12,17 +12,41 @@ import { mockCourses } from '../data/mockCourses';
 
 type Response = { data: unknown[] | null; error: { message: string } | null };
 
+// PostgREST hanya mengembalikan kolom yang diminta, jadi embed yang tidak diminta hilang dari respons.
+const withoutEmbeddedProfiles = (rows: unknown[] | null): unknown[] | null => {
+  if (!Array.isArray(rows)) return rows;
+  return rows.map((row) => {
+    if (!row || typeof row !== 'object' || !('profiles' in row)) return row;
+    const rest = { ...(row as Record<string, unknown>) };
+    delete rest.profiles;
+    return rest;
+  });
+};
+
 // Klien palsu: mencatat query yang dipanggil dan mengembalikan respons yang disiapkan.
-const createFakeClient = (responses: Record<string, Response>, rpcResponse: { error: { message: string } | null } = { error: null }) => {
+const createFakeClient = (
+  responses: Record<string, Response>,
+  rpcResponse: { error: { message: string } | null } = { error: null },
+  options: { denyProfilesEmbed?: boolean } = {}
+) => {
   const calls: { table: string; column: string; value: unknown }[] = [];
   const rpcCalls: { name: string; args: Record<string, unknown> }[] = [];
+  const selectColumns: string[] = [];
 
   const client = {
     from: (table: string) => ({
-      select: () => ({
+      select: (columns: string) => ({
         eq: (column: string, value: unknown) => {
           calls.push({ table, column, value });
-          const result = responses[table] ?? { data: [], error: null };
+          selectColumns.push(columns);
+          // Meniru PostgREST: embed ke profiles ditolak untuk tamu, dan kolom yang tidak diminta tidak dikembalikan.
+          const sheet = responses[table] ?? { data: [], error: null };
+          const denied = Boolean(options.denyProfilesEmbed) && columns.includes('profiles(');
+          const result = denied
+            ? { data: null, error: { message: 'permission denied for table profiles' } }
+            : columns.includes('profiles(')
+              ? sheet
+              : { ...sheet, data: withoutEmbeddedProfiles(sheet.data) };
           return {
             order: () => Promise.resolve(result),
             then: (onFulfilled: (value: Response) => unknown, onRejected: (reason: unknown) => unknown) =>
@@ -37,7 +61,7 @@ const createFakeClient = (responses: Record<string, Response>, rpcResponse: { er
     },
   } as unknown as SupabaseLike;
 
-  return { client, calls, rpcCalls };
+  return { client, calls, rpcCalls, selectColumns };
 };
 
 const courseRow: CourseRow = {
@@ -112,6 +136,45 @@ describe('loadCatalog', () => {
     const fake = createFakeClient({ courses: { data: [], error: null } });
     const result = await loadCatalog(fake.client);
     expect(result.source).toBe('fallback');
+  });
+
+  it('tidak meminta kolom mentor saat tamu membaca katalog', async () => {
+    const fake = createFakeClient({ courses: { data: [courseRow], error: null } });
+    const result = await loadCatalog(fake.client, { includeMentor: false });
+    expect(result.source).toBe('database');
+    expect(fake.selectColumns.every((columns) => !columns.includes('profiles('))).toBe(true);
+    expect(result.courses[0].mentor).toBe('Future Skill Team');
+  });
+
+  it('meminta kolom mentor saat pengguna masuk membaca katalog', async () => {
+    const fake = createFakeClient({ courses: { data: [courseRow], error: null } });
+    const result = await loadCatalog(fake.client, { includeMentor: true });
+    expect(result.source).toBe('database');
+    expect(fake.selectColumns.some((columns) => columns.includes('profiles(display_name)'))).toBe(true);
+    expect(result.courses[0].mentor).toBe('Mentor Satu');
+  });
+
+  it('tamu tetap mendapat katalog saat embed mentor ditolak database', async () => {
+    const fake = createFakeClient(
+      { courses: { data: [courseRow], error: null } },
+      { error: null },
+      { denyProfilesEmbed: true }
+    );
+    const result = await loadCatalog(fake.client, { includeMentor: false });
+    expect(result.source).toBe('database');
+    expect(result.courses[0].title).toBe(courseRow.title);
+    expect(result.courses[0].mentor).toBe('Future Skill Team');
+  });
+
+  it('mencatat akar masalah tamu: query dengan embed mentor ditolak database', async () => {
+    const fake = createFakeClient(
+      { courses: { data: [courseRow], error: null } },
+      { error: null },
+      { denyProfilesEmbed: true }
+    );
+    const result = await loadCatalog(fake.client);
+    expect(result.source).toBe('fallback');
+    expect(result.message).toContain('permission denied');
   });
 });
 
