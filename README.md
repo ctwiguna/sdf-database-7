@@ -4,14 +4,14 @@ Future Skill is a mobile learning platform for practical future skills. The MVP 
 
 ## Product overview
 
-The first course catalog focuses on four practical areas:
+The first course catalog contains four practical areas:
 
-1. Solar panel installation and maintenance
-2. Plumbing
-3. EV charging station installation and maintenance
-4. Electric car and motorcycle maintenance
+1. Instalasi dan Maintenance Solar Panel
+2. EV Battery Management System
+3. PEST Control Course
+4. Mechanical Electrical Plumbing Course
 
-Each course uses an ordered syllabus with modules and lessons. Lessons are delivered through YouTube unlisted videos. Students can enroll in a published course, open lessons in syllabus order, mark lessons as completed, and view course progress.
+Each course uses an ordered syllabus with modules and lessons sourced from the team's selected YouTube playlists. Students can enroll in a published course, open lessons in syllabus order, mark lessons as completed, and view course progress.
 
 The MVP does not include task uploads, submissions, grading, quizzes, certificates, payments, chat, push notifications, offline downloads, video uploads, or iOS release.
 
@@ -106,7 +106,14 @@ The export command creates Android and iOS JavaScript bundles. An APK build and 
 
 ## Content note
 
-The video IDs in `src/data/mockCourses.ts` are development placeholders. Replace them with videos owned by the team or videos with documented permission before the course is published or demonstrated.
+The catalog now uses these playlist sources:
+
+1. Solar Panel: the two selected Solar Panel videos
+2. EV Battery Management System: https://youtube.com/playlist?list=PLeFgcB4EQAz5jvpoiEZyEXbIT6fKpPtCE
+3. PEST Control Course: https://youtube.com/playlist?list=PLD1v2-1R3-sP0w2CGnzk5g1CWoLSEByQC
+4. Mechanical Electrical Plumbing Course: https://youtube.com/playlist?list=PLdLjtrBLr_xAaIAHO4LEVNewJsV4cLC7K
+
+The videos remain embedded through YouTube. Playlist availability and permission to use each video must be checked by the team before the final demonstration. Some videos in the MEP playlist are members only and are not suitable for the submitted flow, so the migration includes only videos that were playable during verification.
 
 ## AI usage
 
