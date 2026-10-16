@@ -1,4 +1,4 @@
--- Test RLS katalog course, hak akses mentor, dan RPC publish_course.
+-- Test RLS katalog course, hak akses mentor, baca katalog tamu, dan RPC publish_course.
 -- Jalankan setelah seluruh migration diterapkan pada database TEST/disposable:
 --   psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f supabase/tests/course_catalog.test.sql
 -- Seluruh fixture berada dalam transaksi dan di-ROLLBACK pada akhir skrip.
@@ -82,6 +82,32 @@ insert into public.lessons (id, module_id, course_id, title, position, youtube_v
   ('eccccccc-3333-4333-8333-ccccccccccc3', 'dccccccc-3333-4333-8333-ccccccccccc3', 'cccccccc-3333-4333-8333-ccccccccccc3', 'Lesson Published', 1, 'PnX1JSVPaTE'),
   ('eddddddd-4444-4444-8444-ddddddddddd4', 'dddddddd-4444-4444-8444-ddddddddddd4', 'cddddddd-4444-4444-8444-ddddddddddd4', 'Lesson Publish', 1, 'IlAOzS9xnik')
 on conflict (id) do nothing;
+
+-- 0. Tamu (anon) dapat membaca katalog published tanpa hak pada tabel profiles.
+set local role anon;
+
+select pg_temp.assert_true(
+  (select count(*) > 0 from public.course_modules where course_id = 'cccccccc-3333-4333-8333-ccccccccccc3'),
+  'tamu dapat membaca module course published'
+);
+
+select pg_temp.assert_true(
+  (select count(*) > 0 from public.lessons where course_id = 'cccccccc-3333-4333-8333-ccccccccccc3'),
+  'tamu dapat membaca lesson course published'
+);
+
+select pg_temp.assert_true(
+  (select count(*) = 0 from public.course_modules where course_id = 'caaaaaaa-1111-4111-8111-aaaaaaaaaaa1'),
+  'tamu tidak melihat module course draft'
+);
+
+select pg_temp.assert_rejects(
+  $sql$ select count(*) from public.profiles $sql$,
+  'permission denied for table profiles',
+  'tamu tetap tidak boleh membaca tabel profiles'
+);
+
+reset role;
 
 -- 1. Mentor A dapat mengubah module dan lesson pada draft miliknya.
 set local role authenticated;

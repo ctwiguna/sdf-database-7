@@ -59,14 +59,22 @@ export type EnrollmentRow = {
   course_id: string;
 };
 
+const COURSE_MODULES_SELECT = 'course_modules(id,title,position,lessons(id,title,position,youtube_video_id))';
+
 const COURSE_SELECT = [
   'id',
   'title',
   'description',
   'category',
   'profiles(display_name)',
-  'course_modules(id,title,position,lessons(id,title,position,youtube_video_id))',
+  COURSE_MODULES_SELECT,
 ].join(',');
+
+// Tabel profiles sengaja hanya dibuka untuk pengguna yang masuk (policy
+// profiles_select_authenticated). Tamu tetap membaca katalog published, tetapi
+// kolom mentor tidak diminta supaya query tidak ditolak database dan katalog
+// tidak jatuh ke data contoh.
+const COURSE_SELECT_WITHOUT_MENTOR = ['id', 'title', 'description', 'category', COURSE_MODULES_SELECT].join(',');
 
 const CATEGORY_COLORS: Record<string, string> = {
   Energi: colors.pastelPeach,
@@ -120,12 +128,23 @@ export const mapCatalogRows = (rows: CourseRow[]): Course[] =>
     modules: [...(row.course_modules ?? [])].sort((a, b) => a.position - b.position).map(toModule),
   }));
 
-export const loadCatalog = async (client: SupabaseLike | null): Promise<CatalogResult> => {
+export type LoadCatalogOptions = {
+  // Nama mentor ada di tabel profiles yang hanya bisa dibaca pengguna masuk.
+  // Tamu memakai nilai false supaya katalog tetap tampil tanpa nama mentor asli.
+  includeMentor?: boolean;
+};
+
+export const loadCatalog = async (
+  client: SupabaseLike | null,
+  options: LoadCatalogOptions = {}
+): Promise<CatalogResult> => {
   if (!client) return { courses: mockCourses, source: 'demo', message: null };
+
+  const columns = options.includeMentor === false ? COURSE_SELECT_WITHOUT_MENTOR : COURSE_SELECT;
 
   const { data, error } = await client
     .from('courses')
-    .select(COURSE_SELECT)
+    .select(columns)
     .eq('status', 'published')
     .order('created_at', { ascending: true });
 
