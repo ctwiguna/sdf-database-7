@@ -2,11 +2,11 @@ import { Course } from '../types';
 
 export const mockCourses: Course[] = [
   {
-    id: 'solar-panel', title: 'Instalasi dan Maintenance Solar Panel', mentor: 'Future Skill Team',
-    description: 'Dasar komponen, keselamatan, instalasi, dan maintenance solar panel.', category: 'Energi', color: '#F4D9CB',
+    id: 'solar-panel', title: 'Dasar Sistem Solar Panel', mentor: 'Future Skill Team',
+    description: 'Pengenalan energi surya, komponen sistem PV, dan datasheet panel surya.', category: 'Energi', color: '#F4D9CB',
     modules: [{ id: 'solar-module-1', title: 'Dasar Solar Panel', position: 1, lessons: [
-      { id: 'solar-panel-lesson-1', title: 'Komponen sistem dan keselamatan', position: 1, videoId: 'YP34klaxl6A' },
-      { id: 'solar-panel-lesson-2', title: 'Gambaran instalasi dan maintenance', position: 2, videoId: 'xQzpGlhTgVU' },
+      { id: 'solar-panel-lesson-1', title: 'Pengenalan energi surya dan sistem PV', position: 1, videoId: 'YP34klaxl6A' },
+      { id: 'solar-panel-lesson-2', title: 'Komponen sistem PV dan datasheet panel', position: 2, videoId: 'xQzpGlhTgVU' },
     ] }],
   },
   {

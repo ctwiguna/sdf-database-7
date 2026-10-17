@@ -38,7 +38,7 @@ describe('urutan silabus', () => {
   it('memuat empat course dengan silabus masing masing', () => {
     expect(mockCourses).toHaveLength(4);
     expect(mockCourses.map((item) => item.title)).toEqual([
-      'Instalasi dan Maintenance Solar Panel',
+      'Dasar Sistem Solar Panel',
       'EV Battery Management System',
       'PEST Control Course',
       'Mechanical Electrical Plumbing Course',

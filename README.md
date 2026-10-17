@@ -6,7 +6,7 @@ Future Skill is a mobile learning platform for practical future skills. The MVP 
 
 The first course catalog contains four practical areas:
 
-1. Instalasi dan Maintenance Solar Panel
+1. Dasar Sistem Solar Panel
 2. EV Battery Management System
 3. PEST Control Course
 4. Mechanical Electrical Plumbing Course
