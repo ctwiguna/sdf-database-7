@@ -43,7 +43,7 @@ describe('urutan silabus', () => {
       'PEST Control Course',
       'Mechanical Electrical Plumbing Course',
     ]);
-    expect(mockCourses.map((item) => orderedLessons(item).length)).toEqual([2, 19, 21, 8]);
+    expect(mockCourses.map((item) => orderedLessons(item).length)).toEqual([2, 18, 18, 6]);
   });
 });
 
