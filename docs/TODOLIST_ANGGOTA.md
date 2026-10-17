@@ -18,10 +18,9 @@ Sesuai Product Requirements Document (PRD Bagian 7) dan kesepakatan kelompok:
 - [X] Editor silabus mentor & RPC `publish_course` untuk admin.
 - [X] Constraints dan RLS proteksi kurikulum course draft vs published.
 - [X] Kurasi delapan video unlisted berizin untuk empat course percontohan.
-- [ ] Catatan izin 44 video di docs/izin-video.md; semua status saat ini belum diverifikasi.
+- [ ] Verifikasi izin penggunaan 44 video di docs/izin-video.md; semua status saat ini belum diverifikasi.
 - [ ] Koordinasi review konten praktisi lapangan.
-- [ ] Konfirmasi judul dua lesson Solar Panel agar sesuai dengan video yang dipilih.
-- [ ] Koordinasi review konten praktisi lapangan.
+- [X] Samakan judul course dan dua lesson Solar Panel dengan versi main: Dasar Sistem Solar Panel, Pengenalan energi surya dan sistem PV, dan Komponen sistem PV dan datasheet panel.
 
 ## 3. Chandra Tabligh | `ctwiguna` (Mobile App Lead & Progres)
 - [x] Setup proyek React Native dengan Expo dan TypeScript.
