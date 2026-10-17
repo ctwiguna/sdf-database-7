@@ -18,6 +18,7 @@ type Props = {
   mentorId: string | null;
   mentorName?: string | null;
   onSelectCourse: (course: MentorCourse) => void;
+  onViewParticipants?: (course: MentorCourse) => void;
 };
 
 export function MentorCourseListScreen({
@@ -25,6 +26,7 @@ export function MentorCourseListScreen({
   mentorId,
   mentorName,
   onSelectCourse,
+  onViewParticipants,
 }: Props) {
   const [courses, setCourses] = useState<MentorCourse[]>([]);
   const [loading, setLoading] = useState(true);
@@ -122,11 +124,18 @@ export function MentorCourseListScreen({
       ) : (
         <View style={styles.list}>
           {courses.map((course) => (
-            <MentorCourseCard
-              key={course.id}
-              course={course}
-              onPress={onSelectCourse}
-            />
+            <View key={course.id} style={styles.courseGroup}>
+              <MentorCourseCard course={course} onPress={onSelectCourse} />
+              {onViewParticipants && (
+                <Pressable
+                  accessibilityRole="button"
+                  style={styles.participantsButton}
+                  onPress={() => onViewParticipants(course)}
+                >
+                  <Text style={styles.participantsText}>Lihat peserta</Text>
+                </Pressable>
+              )}
+            </View>
           ))}
         </View>
       )}
@@ -231,6 +240,23 @@ const styles = StyleSheet.create({
   list: {
     gap: spacing.md,
   },
+  courseGroup: {
+    gap: spacing.sm,
+  },
+  participantsButton: {
+    minHeight: 48,
+    borderRadius: radius.button,
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.border,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  participantsText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: colors.textPrimary,
+  },
   stateTitle: {
     fontSize: 18,
     fontWeight: '700',
@@ -244,3 +270,5 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 });
+
+
