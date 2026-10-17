@@ -113,7 +113,9 @@ The catalog now uses these playlist sources:
 3. PEST Control Course: https://youtube.com/playlist?list=PLD1v2-1R3-sP0w2CGnzk5g1CWoLSEByQC
 4. Mechanical Electrical Plumbing Course: https://youtube.com/playlist?list=PLdLjtrBLr_xAaIAHO4LEVNewJsV4cLC7K
 
-The videos remain embedded through YouTube. Playlist availability and permission to use each video must be checked by the team before the final demonstration. Some videos in the MEP playlist are members only and are not suitable for the submitted flow, so the migration includes only videos that were playable during verification.
+The videos remain embedded through YouTube. Playlist availability and permission to use each video must be checked by the team before the final demonstration. Members only videos in the MEP playlist are not included, because they cannot be played by students.
+
+Six lessons were removed during content review because they are not teaching material: a course announcement, a cartoon, a sales clip, a video with no informative title, and two book review clips. The remaining lessons are 2, 18, 18, and 6 per course. The EV Battery Management System lessons are ordered by the lecture number shown in each video title.
 
 ## AI usage
 
