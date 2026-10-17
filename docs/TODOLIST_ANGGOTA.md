@@ -14,10 +14,13 @@ Sesuai Product Requirements Document (PRD Bagian 7) dan kesepakatan kelompok:
 - [ ] Catatan tiga wawancara nyata calon pengguna (Student, Mentor, Admin), disimpan tim di luar repo dan disusulkan setelah sesi wawancara.
 
 ## 2. Kevin | `KenonymouszzZ` (Katalog & Kurikulum)
-- [ ] Migration katalog: `courses`, `course_modules`, dan `lessons`.
-- [ ] Editor silabus mentor & RPC `publish_course` untuk admin.
-- [ ] Constraints dan RLS proteksi kurikulum course draft vs published.
-- [ ] Kurasi delapan video unlisted berizin untuk empat course percontohan.
+- [X] Migration katalog: `courses`, `course_modules`, dan `lessons`.
+- [X] Editor silabus mentor & RPC `publish_course` untuk admin.
+- [X] Constraints dan RLS proteksi kurikulum course draft vs published.
+- [X] Kurasi delapan video unlisted berizin untuk empat course percontohan.
+- [ ] Catatan izin 44 video di docs/izin-video.md; semua status saat ini belum diverifikasi.
+- [ ] Koordinasi review konten praktisi lapangan.
+- [ ] Konfirmasi judul dua lesson Solar Panel agar sesuai dengan video yang dipilih.
 - [ ] Koordinasi review konten praktisi lapangan.
 
 ## 3. Chandra Tabligh | `ctwiguna` (Mobile App Lead & Progres)
