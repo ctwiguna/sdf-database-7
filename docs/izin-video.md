@@ -1,17 +1,13 @@
-# Catatan Izin Video — Future Skill
+# Catatan Izin Video Future Skill
 
-Dokumen awal untuk 44 lesson pada daftar kurikulum terbaru. **Semua status izin masih belum diverifikasi.**
+Daftar ini mengikuti `src/data/mockCourses.ts` versi terbaru yang diberikan. Total ada 44 lesson: 2 Solar Panel, 18 EV Battery Management System, 18 PEST Control, dan 6 MEP.
 
-Catatan:
-- URL menggunakan format tautan tontonan YouTube berdasarkan `videoId` di `src/data/mockCourses.ts`.
-- Nama channel belum diverifikasi dan perlu dicatat setelah halaman video diperiksa.
-- Tanggal pengecekan dan pemeriksa belum diisi karena verifikasi belum dilakukan.
-- Status `unlisted` tidak otomatis memberi hak untuk menggunakan ulang video. Periksa lisensi dan bukti izin sebelum menyetujui penggunaan.
+**Status izin semua video: belum diverifikasi.** Nama channel, tanggal pengecekan, dan pemeriksa harus diisi setelah benar-benar diperiksa. Status video unlisted tidak otomatis memberi hak untuk menggunakan ulang video.
 
 | Course | Posisi lesson | Judul lesson | Channel | URL | Status izin | Tanggal pengecekan | Pemeriksa |
 |---|---:|---|---|---|---|---|---|
-| Instalasi dan Maintenance Solar Panel | 1 | Komponen sistem dan keselamatan | Belum diverifikasi | https://www.youtube.com/watch?v=YP34klaxl6A | Belum diverifikasi | Belum diperiksa | Belum ditetapkan |
-| Instalasi dan Maintenance Solar Panel | 2 | Gambaran instalasi dan maintenance | Belum diverifikasi | https://www.youtube.com/watch?v=xQzpGlhTgVU | Belum diverifikasi | Belum diperiksa | Belum ditetapkan |
+| Dasar Sistem Solar Panel | 1 | Pengenalan energi surya dan sistem PV | Belum diverifikasi | https://www.youtube.com/watch?v=YP34klaxl6A | Belum diverifikasi | Belum diperiksa | Belum ditetapkan |
+| Dasar Sistem Solar Panel | 2 | Komponen sistem PV dan datasheet panel | Belum diverifikasi | https://www.youtube.com/watch?v=xQzpGlhTgVU | Belum diverifikasi | Belum diperiksa | Belum ditetapkan |
 | EV Battery Management System | 1 | Dasar kendaraan listrik | Belum diverifikasi | https://www.youtube.com/watch?v=MfBWvlY4_iU | Belum diverifikasi | Belum diperiksa | Belum ditetapkan |
 | EV Battery Management System | 2 | Kimia sel dan baterai EV | Belum diverifikasi | https://www.youtube.com/watch?v=NGPzanhjld8 | Belum diverifikasi | Belum diperiksa | Belum ditetapkan |
 | EV Battery Management System | 3 | Teknologi baterai lithium ion | Belum diverifikasi | https://www.youtube.com/watch?v=RBbjU9MBSfQ | Belum diverifikasi | Belum diperiksa | Belum ditetapkan |
@@ -57,7 +53,7 @@ Catatan:
 
 ## Tindak lanjut
 
-- Isi nama channel berdasarkan halaman YouTube yang benar.
-- Catat tanggal dan nama orang yang benar-benar melakukan pemeriksaan.
-- Catat jenis lisensi atau bukti izin setelah diverifikasi.
-- Judul dua lesson Solar Panel di dokumen ini adalah usulan yang perlu dikonfirmasi tim dan disamakan dengan `src/data/mockCourses.ts` setelah disetujui.
+1. Periksa nama channel/uploader untuk setiap URL.
+2. Catat lisensi yang ditampilkan dan/atau bukti izin tertulis yang relevan.
+3. Isi tanggal pemeriksaan dan nama pemeriksa setelah verifikasi dilakukan.
+4. Jangan menandai izin sebagai terverifikasi tanpa bukti.
