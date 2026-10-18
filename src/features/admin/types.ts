@@ -23,3 +23,33 @@ export type AdminReportSummary = {
   totalCompleted: number;
   averageProgress: number;
 };
+
+// Baris layar kelola course. Bentuknya mengikuti kolom tabel courses apa adanya,
+// ditambah nama mentor dan jumlah materi. Angka agregat peserta ada di tipe laporan.
+export type AdminCourseRow = {
+  courseId: string;
+  title: string;
+  description: string;
+  category: string;
+  capacity: number;
+  status: CourseStatus;
+  mentorId: string | null;
+  mentorName: string;
+  totalLessons: number;
+};
+
+// Akun mentor yang bisa dipasangkan ke course pada formulir.
+export type MentorOption = {
+  id: string;
+  displayName: string;
+};
+
+// Isian formulir buat atau ubah draf course.
+// mentorId null berarti course belum punya mentor dan belum boleh diterbitkan.
+export type DraftCourseInput = {
+  title: string;
+  description: string;
+  category: string;
+  capacity: number;
+  mentorId: string | null;
+};
