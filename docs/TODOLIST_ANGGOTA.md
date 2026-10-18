@@ -14,11 +14,13 @@ Sesuai Product Requirements Document (PRD Bagian 7) dan kesepakatan kelompok:
 - [ ] Catatan tiga wawancara nyata calon pengguna (Student, Mentor, Admin), disimpan tim di luar repo dan disusulkan setelah sesi wawancara.
 
 ## 2. Kevin | `KenonymouszzZ` (Katalog & Kurikulum)
-- [ ] Migration katalog: `courses`, `course_modules`, dan `lessons`.
-- [ ] Editor silabus mentor & RPC `publish_course` untuk admin.
-- [ ] Constraints dan RLS proteksi kurikulum course draft vs published.
-- [ ] Kurasi delapan video unlisted berizin untuk empat course percontohan.
+- [X] Migration katalog: `courses`, `course_modules`, dan `lessons`.
+- [X] Editor silabus mentor & RPC `publish_course` untuk admin.
+- [X] Constraints dan RLS proteksi kurikulum course draft vs published.
+- [X] Kurasi video unlisted berizin untuk empat course percontohan, total 44 lesson.
+- [ ] Verifikasi izin penggunaan 44 video di docs/izin-video.md; semua status saat ini belum diverifikasi.
 - [ ] Koordinasi review konten praktisi lapangan.
+- [X] Menyelaraskan catatan izin video dengan nama course dan judul lesson terbaru.
 
 ## 3. Chandra Tabligh | `ctwiguna` (Mobile App Lead & Progres)
 - [x] Setup proyek React Native dengan Expo dan TypeScript.
