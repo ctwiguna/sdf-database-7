@@ -18,8 +18,10 @@ import { MentorDatabaseClient } from './src/features/mentor/lib/mentor';
 import { MentorRpcClient } from './src/features/mentor/lib/report';
 import { MentorCourse } from './src/features/mentor/types';
 import { DEFAULT_PROFILE, UserProfile, loadUserProfile } from './src/lib/profile';
+import { AdminReportScreen } from './src/features/admin/screens/AdminReportScreen';
+import { AdminRpcClient } from './src/features/admin/lib/admin';
 
-type Screen = 'catalog' | 'mine' | 'course' | 'lesson' | 'account' | 'mentorCourses' | 'mentorCourse' | 'mentorParticipants';
+type Screen = 'catalog' | 'mine' | 'course' | 'lesson' | 'account' | 'mentorCourses' | 'mentorCourse' | 'mentorParticipants' | 'adminReport';
 
 function App() {
   const client = dataClient;
@@ -204,7 +206,8 @@ function App() {
       {screen === 'mentorCourses' && <MentorCourseListScreen client={client as unknown as MentorDatabaseClient | null} mentorId={user?.id ?? null} mentorName={profile.displayName} onSelectCourse={(course) => { setMentorCourse(course); setScreen('mentorCourse'); }} onViewParticipants={(course) => { setMentorCourse(course); setScreen('mentorParticipants'); }} />}
       {screen === 'mentorCourse' && mentorCourse && <MentorCourseDetailScreen client={client as unknown as MentorDatabaseClient | null} courseId={mentorCourse.id} onBack={() => setScreen('mentorCourses')} />}
       {screen === 'mentorParticipants' && mentorCourse && <MentorParticipantsScreen client={client as unknown as MentorRpcClient | null} course={mentorCourse} onBack={() => setScreen('mentorCourses')} />}
-      {screen !== 'lesson' && <View style={styles.bottomNav}><NavItem icon="grid-outline" label="Katalog" active={screen === 'catalog'} onPress={() => setScreen('catalog')} /><NavItem icon="play-circle-outline" label="Kelas saya" active={screen === 'mine'} onPress={() => setScreen('mine')} />{profile.role === 'mentor' && <NavItem icon="create-outline" label="Kelola" active={screen === 'mentorCourses' || screen === 'mentorCourse' || screen === 'mentorParticipants'} onPress={() => setScreen('mentorCourses')} />}<NavItem icon="person-outline" label="Akun" active={screen === 'account'} onPress={() => setScreen('account')} /></View>}
+      {screen === 'adminReport' && <AdminReportScreen client={client as unknown as AdminRpcClient | null} onBack={() => setScreen('catalog')} />}
+      {screen !== 'lesson' && <View style={styles.bottomNav}><NavItem icon="grid-outline" label="Katalog" active={screen === 'catalog'} onPress={() => setScreen('catalog')} /><NavItem icon="play-circle-outline" label="Kelas saya" active={screen === 'mine'} onPress={() => setScreen('mine')} />{profile.role === 'mentor' && <NavItem icon="create-outline" label="Kelola" active={screen === 'mentorCourses' || screen === 'mentorCourse' || screen === 'mentorParticipants'} onPress={() => setScreen('mentorCourses')} />}{profile.role === 'admin' && <NavItem icon="stats-chart-outline" label="Laporan" active={screen === 'adminReport'} onPress={() => setScreen('adminReport')} />}<NavItem icon="person-outline" label="Akun" active={screen === 'account'} onPress={() => setScreen('account')} /></View>}
       {toast && <View style={toastStyles.toast}><Ionicons name="alert-circle-outline" size={18} color={colors.textPrimary} /><Text style={toastStyles.toastText}>{toast}</Text></View>}
     </SafeAreaView>
   );
