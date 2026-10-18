@@ -11,10 +11,19 @@ import { CatalogSource, enrollInCourse, loadCatalog, loadEnrollments, loadProgre
 import { SessionUser, signIn, signOut, signUp } from './src/lib/session';
 import { authClient, dataClient } from './src/lib/supabase';
 import { AccountScreen } from './src/screens/AccountScreen';
+import { MentorCourseDetailScreen } from './src/features/mentor/screens/MentorCourseDetailScreen';
+import { MentorCourseListScreen } from './src/features/mentor/screens/MentorCourseListScreen';
+import { MentorParticipantsScreen } from './src/features/mentor/screens/MentorParticipantsScreen';
+import { MentorDatabaseClient } from './src/features/mentor/lib/mentor';
+import { MentorRpcClient } from './src/features/mentor/lib/report';
+import { MentorCourse } from './src/features/mentor/types';
+import { DEFAULT_PROFILE, UserProfile, loadUserProfile } from './src/lib/profile';
+
+type Screen = 'catalog' | 'mine' | 'course' | 'lesson' | 'account' | 'mentorCourses' | 'mentorCourse' | 'mentorParticipants';
 
 function App() {
   const client = dataClient;
-  const [screen, setScreen] = useState<'catalog' | 'mine' | 'course' | 'lesson' | 'account'>('catalog');
+  const [screen, setScreen] = useState<Screen>('catalog');
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [query, setQuery] = useState('');
@@ -27,12 +36,15 @@ function App() {
   const [progress, setProgress] = useState<ProgressMap>({});
   const [accountBusy, setAccountBusy] = useState(false);
   const [sessionReady, setSessionReady] = useState(false);
+  const [profile, setProfile] = useState<UserProfile>(DEFAULT_PROFILE);
+  const [mentorCourse, setMentorCourse] = useState<MentorCourse | null>(null);
 
-  // Sesi pengguna dipasang sekali, lalu enrollment dan progres dibaca dari database.
+  // Sesi pengguna dipasang sekali, lalu peran, enrollment dan progres dibaca dari database.
   const applySession = async (id: string, email: string) => {
     setUser({ id, email });
     if (!client) return;
     try {
+      setProfile(await loadUserProfile(client, id));
       const rows = await loadEnrollments(client, id);
       setEnrolled(rows.map((row) => row.course_id));
       setProgress(await loadProgress(client, rows));
@@ -168,6 +180,8 @@ function App() {
     try {
       await signOut(authClient);
       setUser(null);
+      setProfile(DEFAULT_PROFILE);
+      setMentorCourse(null);
       setEnrolled([]);
       setProgress({});
     } finally {
@@ -187,7 +201,10 @@ function App() {
       {screen === 'course' && currentCourse && <CourseDetail course={currentCourse} enrolled={enrolled.includes(currentCourse.id)} completed={completed} total={lessons.length} onBack={() => setScreen('catalog')} onStart={startCourse} />}
       {screen === 'lesson' && currentCourse && selectedLesson && <LessonPlayer course={currentCourse} lesson={selectedLesson} completed={Boolean(progress[selectedLesson.id])} position={currentIndex + 1} total={lessons.length} onBack={() => setScreen('course')} onComplete={markComplete} onNext={nextLesson} />}
       {screen === 'account' && <AccountScreen databaseReady={Boolean(client)} userEmail={user?.email ?? null} dataSource={source} notice={notice} busy={accountBusy} onSignIn={handleSignIn} onSignUp={handleSignUp} onSignOut={handleSignOut} />}
-      {screen !== 'lesson' && <View style={styles.bottomNav}><NavItem icon="grid-outline" label="Katalog" active={screen === 'catalog'} onPress={() => setScreen('catalog')} /><NavItem icon="play-circle-outline" label="Kelas saya" active={screen === 'mine'} onPress={() => setScreen('mine')} /><NavItem icon="person-outline" label="Akun" active={screen === 'account'} onPress={() => setScreen('account')} /></View>}
+      {screen === 'mentorCourses' && <MentorCourseListScreen client={client as unknown as MentorDatabaseClient | null} mentorId={user?.id ?? null} mentorName={profile.displayName} onSelectCourse={(course) => { setMentorCourse(course); setScreen('mentorCourse'); }} onViewParticipants={(course) => { setMentorCourse(course); setScreen('mentorParticipants'); }} />}
+      {screen === 'mentorCourse' && mentorCourse && <MentorCourseDetailScreen client={client as unknown as MentorDatabaseClient | null} courseId={mentorCourse.id} onBack={() => setScreen('mentorCourses')} />}
+      {screen === 'mentorParticipants' && mentorCourse && <MentorParticipantsScreen client={client as unknown as MentorRpcClient | null} course={mentorCourse} onBack={() => setScreen('mentorCourses')} />}
+      {screen !== 'lesson' && <View style={styles.bottomNav}><NavItem icon="grid-outline" label="Katalog" active={screen === 'catalog'} onPress={() => setScreen('catalog')} /><NavItem icon="play-circle-outline" label="Kelas saya" active={screen === 'mine'} onPress={() => setScreen('mine')} />{profile.role === 'mentor' && <NavItem icon="create-outline" label="Kelola" active={screen === 'mentorCourses' || screen === 'mentorCourse' || screen === 'mentorParticipants'} onPress={() => setScreen('mentorCourses')} />}<NavItem icon="person-outline" label="Akun" active={screen === 'account'} onPress={() => setScreen('account')} /></View>}
       {toast && <View style={toastStyles.toast}><Ionicons name="alert-circle-outline" size={18} color={colors.textPrimary} /><Text style={toastStyles.toastText}>{toast}</Text></View>}
     </SafeAreaView>
   );
