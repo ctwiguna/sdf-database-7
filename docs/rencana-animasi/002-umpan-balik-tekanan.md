@@ -1,6 +1,6 @@
 # 002 Umpan balik tekanan pada tombol dan kartu
 
-Status: TODO
+Status: DONE (mekanis)
 Commit: f57fa9e
 Tingkat: MEDIUM
 Kategori: Physicality & origin

@@ -1,6 +1,6 @@
 # 005 Gerak modal yang sesuai posisi
 
-Status: TODO
+Status: DONE (mekanis)
 Commit: f57fa9e
 Tingkat: MEDIUM
 Kategori: Physicality & origin

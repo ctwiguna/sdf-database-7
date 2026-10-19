@@ -1,6 +1,6 @@
 # 001 Prasarana gerak: token dan hook reduce motion
 
-Status: TODO
+Status: DONE (mekanis)
 Commit: f57fa9e
 Tingkat: LOW
 Kategori: Cohesion & tokens

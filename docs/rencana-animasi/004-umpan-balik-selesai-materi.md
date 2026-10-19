@@ -1,6 +1,6 @@
 # 004 Umpan balik saat materi selesai
 
-Status: TODO
+Status: DONE (mekanis)
 Commit: f57fa9e
 Tingkat: LOW
 Kategori: State indication

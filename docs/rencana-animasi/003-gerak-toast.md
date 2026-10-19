@@ -1,6 +1,6 @@
 # 003 Gerak masuk dan keluar toast
 
-Status: TODO
+Status: DONE (mekanis)
 Commit: f57fa9e
 Tingkat: MEDIUM
 Kategori: Missed opportunities, preventing a jarring change

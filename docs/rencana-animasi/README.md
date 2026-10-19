@@ -8,11 +8,13 @@ Commit saat rencana disusun: `f57fa9e`. Kalau kode sudah bergerak dari commit it
 
 | Nomor | Judul | Tingkat | Status | Bergantung pada |
 | --- | --- | --- | --- | --- |
-| 001 | Prasarana gerak: token dan hook reduce motion | LOW | TODO | tidak ada |
-| 002 | Umpan balik tekanan pada tombol dan kartu | MEDIUM | TODO | 001 |
-| 003 | Gerak masuk dan keluar toast | MEDIUM | TODO | 001 |
-| 004 | Umpan balik saat materi selesai | LOW | TODO | 001 |
-| 005 | Gerak modal yang sesuai posisi | MEDIUM | TODO | 001 |
+| 001 | Prasarana gerak: token dan hook reduce motion | LOW | DONE (mekanis) | tidak ada |
+| 002 | Umpan balik tekanan pada tombol dan kartu | MEDIUM | DONE (mekanis) | 001 |
+| 003 | Gerak masuk dan keluar toast | MEDIUM | DONE (mekanis) | 001 |
+| 004 | Umpan balik saat materi selesai | LOW | DONE (mekanis) | 001 |
+| 005 | Gerak modal yang sesuai posisi | MEDIUM | DONE (mekanis) | 001 |
+
+Catatan: kelima rencana sudah diterapkan dan diverifikasi secara mekanis (`npm run typecheck` bersih dan `npm test` 91 tes lulus). Feel check di emulator atau perangkat belum dijalankan, jadi status di atas baru mencakup verifikasi mekanis.
 
 ## Urutan pengerjaan yang disarankan
 
