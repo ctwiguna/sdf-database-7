@@ -48,7 +48,7 @@ src/lib/catalog.ts            Supabase data access for catalog, enrollment, and 
 src/lib/session.ts            Email sign in, sign up, and validation helpers
 src/lib/course.ts             Course ordering and progress helpers
 src/lib/supabase.ts           Supabase client and session storage configuration
-src/screens/AccountScreen.tsx Account form and connection status
+src/features/account/screens/AccountScreen.tsx  Account form and connection status
 src/theme.ts                  Shared design tokens
 src/types.ts                  Shared TypeScript types
 src/__tests__/course.test.ts  Course and progress tests
@@ -94,6 +94,19 @@ When `.env` is filled, the app connects to Supabase:
 
 Mentor and admin roles are assigned with the Supabase SQL editor, because the profiles trigger rejects role changes that come from the API.
 
+## Test accounts
+
+Sign in on the Akun tab. Roles are checked in the database, so use the account that matches the feature you want to see. Passwords are supplied with the submission package and are not stored in this repository.
+
+| Role | Email | What it demonstrates |
+| :---- | :---- | :---- |
+| Student | uji.siswa1@futureskill.id | Enrollment, lesson order, and progress |
+| Student | uji.siswa2@futureskill.id | A second student with separate progress |
+| Mentor | uji.mentor@futureskill.id | Syllabus curation and participant monitoring |
+| Admin | uji.admin@futureskill.id | Course publishing and progress reports |
+
+New student accounts can also be created from the sign up form on the Akun tab. Mentor and admin roles cannot be self assigned, so those two accounts are prepared in the database.
+
 ## Verification commands
 
 ```bash
@@ -102,7 +115,7 @@ npm test
 npm run export
 ```
 
-The export command creates Android and iOS JavaScript bundles. An APK build and testing on a physical Android device are still required before the final demo.
+The export command creates Android and iOS JavaScript bundles. A release APK is built locally with `npm run apk:local`, which runs the Expo prebuild step and the Gradle release build with Java 17. The output file is `android/app/build/outputs/apk/release/app-release.apk`, and it starts without the Expo development server.
 
 ## Content note
 

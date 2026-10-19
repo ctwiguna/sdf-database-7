@@ -10,7 +10,7 @@ import { countCompleted, flattenLessons, nextLesson as pickNextLesson, progressP
 import { CatalogSource, enrollInCourse, loadCatalog, loadEnrollments, loadProgress, markLessonComplete } from './src/lib/catalog';
 import { SessionUser, signIn, signOut, signUp } from './src/lib/session';
 import { authClient, dataClient } from './src/lib/supabase';
-import { AccountScreen } from './src/screens/AccountScreen';
+import { AccountScreen } from './src/features/account/screens/AccountScreen';
 import { MentorCourseDetailScreen } from './src/features/mentor/screens/MentorCourseDetailScreen';
 import { MentorCourseListScreen } from './src/features/mentor/screens/MentorCourseListScreen';
 import { MentorParticipantsScreen } from './src/features/mentor/screens/MentorParticipantsScreen';
