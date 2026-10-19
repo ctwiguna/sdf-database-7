@@ -265,22 +265,44 @@ function LessonPlayer({ course, lesson, completed, position, total, onBack, onCo
   const youtubeUrl = `https://www.youtube.com/watch?v=${lesson.videoId}`;
   const iconScale = useRef(new Animated.Value(1)).current;
   const reduceMotion = useReduceMotion();
+  const courseComplete = completed && position === total;
+  const lastStatus = useRef({ id: lesson.id, completed });
 
+  // Ikon tumbuh hanya saat status materi berubah jadi selesai, bukan saat layar dibuka.
   useEffect(() => {
-    if (!completed) return;
+    const justCompleted = completed && lastStatus.current.id === lesson.id && !lastStatus.current.completed;
+    lastStatus.current = { id: lesson.id, completed };
+    if (!justCompleted) return;
     if (reduceMotion) {
       iconScale.setValue(1);
       return;
     }
     iconScale.setValue(0.7);
+    if (courseComplete) {
+      Animated.timing(iconScale, {
+        toValue: 1.06,
+        duration: 180,
+        easing: motion.easing.out,
+        useNativeDriver: true,
+      }).start(({ finished }) => {
+        if (!finished) return;
+        Animated.timing(iconScale, {
+          toValue: 1,
+          duration: 80,
+          easing: motion.easing.out,
+          useNativeDriver: true,
+        }).start();
+      });
+      return;
+    }
     Animated.timing(iconScale, {
       toValue: 1,
       duration: motion.duration.fast,
       easing: motion.easing.out,
       useNativeDriver: true,
     }).start();
-  }, [completed, reduceMotion, iconScale]);
-  return <ScrollView contentContainerStyle={styles.content}><BackButton onPress={onBack} /><Text style={styles.kicker}>{course.title}</Text><Text style={styles.detailTitle}>{lesson.title}</Text><Text style={styles.meta}>Materi {position} dari {total}</Text><View style={styles.video}><WebView source={{ uri: `https://www.youtube.com/embed/${lesson.videoId}` }} allowsFullscreenVideo javaScriptEnabled /></View><Text style={styles.safety}>Materi pengenalan. Ikuti panduan keselamatan dan jangan melakukan pekerjaan pada perangkat aktif tanpa teknisi kompeten.</Text><View style={styles.lessonActions}><PressableScale style={[styles.secondaryButton, completed && styles.completedButton]} onPress={onComplete}><Animated.View style={{ transform: [{ scale: iconScale }] }}><Ionicons name={completed ? 'checkmark-circle' : 'checkmark-circle-outline'} size={20} color={completed ? colors.success : colors.textPrimary} /></Animated.View><Text style={styles.secondaryText}>{completed ? 'Materi selesai' : 'Tandai selesai'}</Text></PressableScale><PressableScale style={styles.secondaryButton} onPress={() => Linking.openURL(youtubeUrl)}><Ionicons name="open-outline" size={20} color={colors.textPrimary} /><Text style={styles.secondaryText}>Buka di YouTube</Text></PressableScale></View><PressableScale style={styles.primaryButton} onPress={onNext}><Text style={styles.primaryText}>{position < total ? 'Materi berikutnya' : 'Lihat progres'}</Text><Ionicons name="arrow-forward" size={18} color={colors.surface} /></PressableScale></ScrollView>;
+  }, [completed, reduceMotion, iconScale, lesson.id, courseComplete]);
+  return <ScrollView contentContainerStyle={styles.content}><BackButton onPress={onBack} /><Text style={styles.kicker}>{course.title}</Text><Text style={styles.detailTitle}>{lesson.title}</Text><Text style={styles.meta}>Materi {position} dari {total}</Text><View style={styles.video}><WebView source={{ uri: `https://www.youtube.com/embed/${lesson.videoId}` }} allowsFullscreenVideo javaScriptEnabled /></View><Text style={styles.safety}>Materi pengenalan. Ikuti panduan keselamatan dan jangan melakukan pekerjaan pada perangkat aktif tanpa teknisi kompeten.</Text><View style={styles.lessonActions}><PressableScale style={[styles.secondaryButton, completed && styles.completedButton]} onPress={onComplete}><Animated.View style={{ transform: [{ scale: iconScale }] }}><Ionicons name={completed ? 'checkmark-circle' : 'checkmark-circle-outline'} size={20} color={completed ? colors.success : colors.textPrimary} /></Animated.View><Text style={styles.secondaryText}>{completed ? (courseComplete ? 'Course selesai' : 'Materi selesai') : 'Tandai selesai'}</Text></PressableScale><PressableScale style={styles.secondaryButton} onPress={() => Linking.openURL(youtubeUrl)}><Ionicons name="open-outline" size={20} color={colors.textPrimary} /><Text style={styles.secondaryText}>Buka di YouTube</Text></PressableScale></View><PressableScale style={styles.primaryButton} onPress={onNext}><Text style={styles.primaryText}>{position < total ? 'Materi berikutnya' : 'Lihat progres'}</Text><Ionicons name="arrow-forward" size={18} color={colors.surface} /></PressableScale></ScrollView>;
 }
 
 function MyCourses({ courses, enrolled, progress, onOpen }: { courses: Course[]; enrolled: string[]; progress: ProgressMap; onOpen: (course: Course) => void }) {

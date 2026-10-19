@@ -23,10 +23,13 @@ Catatan: kelima rencana sudah diterapkan dan diverifikasi secara mekanis (`npm r
 3. Rencana 002 dan 004 sama sama menyentuh `App.tsx:245`. Jangan dikerjakan bersamaan oleh dua orang. Selesaikan 002 dulu, lalu 004.
 4. Rencana 005 menyentuh tiga berkas modal dan tidak bersinggungan dengan yang lain. Kalau waktu mepet sebelum batas submit, rencana ini yang paling aman ditunda karena modalnya sudah beranimasi, hanya jenis geraknya yang belum tepat.
 
-## Kandidat yang belum direncanakan
+## Tambahan setelah rencana 001 sampai 005
 
-1. Gerak daftar mentor setelah simpan atau hapus modul dan materi. Perbaikannya satu baris di tiga titik: `LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)` sebelum `await loadCourse()` di `MentorCourseDetailScreen.tsx:133`, `183`, dan `210`. Ini masuk daftar peluang nomor 4 di berkas audit dan bisa dikerjakan kapan saja.
-2. Penanda saat course terakhir selesai. Ini masuk daftar peluang nomor 5 di berkas audit, dan butuh keputusan produk lebih dulu karena geraknya memakai anggaran delight. Geraknya harus satu beat saja, tanpa konfeti.
+Dua peluang terakhir di berkas audit sudah menyusul, di luar kelima rencana di atas. Keduanya masuk bersama satu penyempurnaan kecil pada ikon materi.
+
+1. Gerak daftar mentor setelah simpan atau hapus modul dan materi. `LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)` dipanggil sebelum pemuatan ulang daftar di `MentorCourseDetailScreen.tsx`, dan dilewati saat reduce motion aktif. Animasi tata letak sudah aktif di arsitektur baru, jadi tidak ada flag tambahan yang dipasang. Ini menutup peluang nomor 4 di berkas audit.
+2. Penanda saat course terakhir selesai. Saat materi terakhir sebuah course ditandai selesai, ikon centang tumbuh dengan overshoot ringan selama 260ms dan label tombolnya jadi Course selesai. Tanpa konfeti. Saat reduce motion aktif, hanya labelnya yang berubah. Ini menutup peluang nomor 5, dan keputusan produknya sudah diambil supaya tidak menggantung. Kalau labelnya tidak diinginkan, cukup kembalikan satu baris di `App.tsx`.
+3. Penyempurnaan ikon materi. Ikon centang sekarang hanya tumbuh saat status materi benar benar berubah jadi selesai. Sebelumnya ikon ikut tumbuh saat materi yang sudah selesai dibuka ulang, dan itu tidak sesuai butir 2 di bagian Verifikasi rencana 004.
 
 ## Cara memakai folder ini
 

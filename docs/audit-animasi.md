@@ -37,3 +37,5 @@ Semua nilai kurva di tabel ini memakai kosakata gerak repo ini: `motion.easing.o
 Aplikasi ini butuh gerak yang sedikit. Sebagai alat belajar yang isinya daftar dan tombol, kondisi sekarang hampir benar, dan modal yang sudah beranimasi menunjukkan timnya sudah tahu caranya. Yang kurang dua: belum ada elemen yang bergerak selain modal, dan kontrol yang paling sering disentuh belum memberi respons. Saran dengan leverage paling besar adalah nomor 2, karena empat kontrol utama siswa belum bereaksi terhadap sentuhan, sementara perbaikannya hanya menyentuh satu berkas dan tidak perlu library baru. Nomor 1 menyusul karena toast adalah satu satunya saluran umpan balik saat gagal, dan sekarang muncul sebagai kejutan di tepi bawah layar.
 
 Berkas rencana eksekusi ada di `docs/rencana-animasi/`.
+
+Semua peluang di tabel atas sudah diterapkan. Dua peluang terakhir yang sempat ditahan, yaitu gerak daftar mentor dan penanda saat course selesai, juga sudah menyusul. Status terbarunya ada di `docs/rencana-animasi/README.md`.
