@@ -81,3 +81,4 @@ Skala awal 0.7 dipakai karena ikonnya kecil, jadi perubahan mutlaknya hanya bebe
    3. Tekan tombolnya dua kali cepat. Animasi tidak boleh mengulang dari skala 0.7 saat status sudah selesai.
 3. Uji reduce motion: aktifkan reduce motion, lalu tandai satu materi selesai. Ikon harus langsung tampil penuh tanpa tumbuh.
 4. Selesai bila: ikon tumbuh sekali saat status berubah jadi selesai, label tidak bergeser, dan tes tetap lulus.
+5. Catatan penerapan: ikon hanya tumbuh saat status materi berubah jadi selesai. Pemeriksaan status sebelumnya ditambahkan supaya membuka materi yang sudah selesai tidak memicu animasi, sesuai butir 2 di atas.
