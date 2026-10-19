@@ -38,8 +38,8 @@ Sesuai Product Requirements Document (PRD Bagian 7) dan kesepakatan kelompok:
 - [ ] Pengujian akses mentor, urutan silabus, dan isolasi progres lintas course.
 
 ## 5. NAWWAF | `AeternalSym` (Fitur Admin, QA & Deliverables)
-- [ ] Layar antarmuka admin untuk publikasi course dan laporan.
-- [ ] Query RPC `admin_course_report` dengan agregasi CTE.
-- [ ] Script benchmark index performa `lesson_progress(course_id, completed_at DESC)`.
+- [x] Layar antarmuka admin untuk publikasi course dan laporan.
+- [x] Query RPC `admin_course_report` dengan agregasi CTE.
+- [x] Script benchmark index performa `lesson_progress(course_id, completed_at DESC)`.
 - [ ] Penyusunan pitch deck startup format PDF (Problem, Solution, Monetisation).
 - [ ] Backup video demo aplikasi 2-3 menit.
