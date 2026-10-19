@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, radius, spacing } from '../theme';
-import { validateCredentials } from '../lib/session';
-import { CatalogSource } from '../lib/catalog';
+import { colors, radius, spacing } from '../../../theme';
+import { validateCredentials } from '../../../lib/session';
+import { CatalogSource } from '../../../lib/catalog';
 
 type Props = {
   databaseReady: boolean;
