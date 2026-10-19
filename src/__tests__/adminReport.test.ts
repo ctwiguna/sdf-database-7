@@ -81,13 +81,13 @@ describe('laporan course admin', () => {
     expect((await fetchAdminCourseReport(client))[0].status).toBe('draft');
   });
 
-  it('menerjemahkan galat not_admin menjadi pesan yang bisa dibaca', async () => {
+  it('menerjemahkan error not_admin menjadi pesan yang bisa dibaca', async () => {
     await expect(
       fetchAdminCourseReport(rpcReturning({ data: null, error: { message: 'not_admin' } }))
     ).rejects.toThrow('hanya untuk admin');
   });
 
-  it('menerjemahkan galat sesi berakhir', async () => {
+  it('menerjemahkan error sesi berakhir', async () => {
     await expect(
       fetchAdminCourseReport(rpcReturning({ data: null, error: { message: 'not_authenticated' } }))
     ).rejects.toThrow('masuk ulang');
@@ -97,9 +97,9 @@ describe('laporan course admin', () => {
     await expect(fetchAdminCourseReport(null)).rejects.toThrow('Koneksi database belum diatur');
   });
 
-  it('mengembalikan pesan asli untuk galat yang tidak dikenal', () => {
+  it('mengembalikan pesan asli untuk error yang tidak dikenal', () => {
     expect(friendlyAdminError({ message: 'boom' })).toBe('boom');
-    expect(friendlyAdminError(null)).toBe('Terjadi galat yang tidak diketahui.');
+    expect(friendlyAdminError(null)).toBe('Terjadi error yang tidak diketahui.');
   });
 });
 

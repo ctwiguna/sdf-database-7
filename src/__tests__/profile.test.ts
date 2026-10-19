@@ -91,7 +91,7 @@ describe('loadUserProfile', () => {
     expect(calls[0].value).toBe('user-9');
   });
 
-  test('galat bacaan tidak melempar dan jatuh ke student', async () => {
+  test('error bacaan tidak melempar dan jatuh ke student', async () => {
     const { client } = makeClient(null, { message: 'permission denied' });
     await expect(loadUserProfile(client, 'user-9')).resolves.toEqual(DEFAULT_PROFILE);
   });

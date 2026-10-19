@@ -21,7 +21,7 @@ export type AdminDataClient = {
 
 export type AdminClient = AdminDataClient & AdminRpcClient;
 
-// Kode galat RPC diterjemahkan di satu tempat supaya layar tidak menampilkan kode mentah.
+// Kode error RPC diterjemahkan di satu tempat supaya layar tidak menampilkan kode mentah.
 // Daftar ini sekaligus menjadi daftar kasus gagal yang layak diperagakan saat demo.
 const ERROR_TRANSLATIONS: Array<{ test: RegExp; message: string }> = [
   { test: /not_admin/i, message: 'Halaman ini hanya untuk admin. Masuk memakai akun admin.' },
@@ -45,7 +45,7 @@ const ERROR_TRANSLATIONS: Array<{ test: RegExp; message: string }> = [
 ];
 
 export const friendlyAdminError = (error: unknown): string => {
-  if (!error) return 'Terjadi galat yang tidak diketahui.';
+  if (!error) return 'Terjadi error yang tidak diketahui.';
   const raw = typeof error === 'string' ? error : (error as { message?: string }).message || String(error);
   for (const item of ERROR_TRANSLATIONS) {
     if (item.test.test(raw)) return item.message;

@@ -207,7 +207,7 @@ describe('pendaftaran dan progres', () => {
     expect(fake.rpcCalls[0]).toEqual({ name: 'complete_lesson', args: { p_lesson_id: 'lesson-7' } });
   });
 
-  it('menerjemahkan galat RPC kuota penuh', async () => {
+  it('menerjemahkan error RPC kuota penuh', async () => {
     const fake = createFakeClient({}, { error: { message: 'course_capacity_full' } });
     await expect(enrollInCourse(fake.client, 'course-9')).rejects.toThrow('Kuota course ini sudah penuh.');
   });
