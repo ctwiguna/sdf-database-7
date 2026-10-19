@@ -84,7 +84,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 const PALETTE = [colors.pastelPeach, colors.pastelLavender, '#DDECCF', '#F4E5C8'];
 
-// Pesan galat RPC diterjemahkan supaya siswa membaca kalimat yang jelas.
+// Pesan error RPC diterjemahkan supaya siswa membaca kalimat yang jelas.
 const RPC_MESSAGES: Record<string, string> = {
   not_authenticated: 'Sesi berakhir. Masuk ulang dari tab Akun.',
   role_not_allowed: 'Aksi ini hanya untuk akun siswa.',

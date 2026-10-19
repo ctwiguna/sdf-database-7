@@ -40,12 +40,12 @@ describe('validasi masukan akun', () => {
   });
 });
 
-describe('pesan galat autentikasi', () => {
-  it('menerjemahkan galat kredensial salah', () => {
+describe('pesan error autentikasi', () => {
+  it('menerjemahkan error kredensial salah', () => {
     expect(friendlyAuthMessage('Invalid login credentials')).toBe('Email atau kata sandi salah.');
   });
 
-  it('menerjemahkan galat email belum dikonfirmasi', () => {
+  it('menerjemahkan error email belum dikonfirmasi', () => {
     expect(friendlyAuthMessage('Email not confirmed')).toBe('Email belum dikonfirmasi. Cek kotak masuk lalu masuk lagi.');
   });
 });
@@ -74,7 +74,7 @@ describe('masuk, daftar, dan keluar', () => {
     expect(auth.calls).toHaveLength(0);
   });
 
-  it('meneruskan galat autentikasi dengan pesan yang ramah', async () => {
+  it('meneruskan error autentikasi dengan pesan yang ramah', async () => {
     const auth = createAuthClient({ data: { user: null, session: null }, error: { message: 'Invalid login credentials' } });
     await expect(signIn(auth.client, 'chandra@example.com', 'salahsekali')).rejects.toThrow('Email atau kata sandi salah.');
   });

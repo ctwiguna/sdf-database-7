@@ -47,7 +47,7 @@ const ERROR_TRANSLATIONS: Array<{ test: RegExp | string; message: string }> = [
 ];
 
 export const friendlyErrorMessage = (error: unknown): string => {
-  if (!error) return 'Terjadi galat yang tidak diketahui.';
+  if (!error) return 'Terjadi error yang tidak diketahui.';
   const raw = typeof error === 'string' ? error : (error as { message?: string }).message || String(error);
 
   for (const item of ERROR_TRANSLATIONS) {

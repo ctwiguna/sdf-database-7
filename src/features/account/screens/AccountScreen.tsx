@@ -41,7 +41,7 @@ export function AccountScreen({ databaseReady, userEmail, dataSource, notice, bu
       }
       setPassword('');
     } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : 'Terjadi galat, coba lagi.');
+      setError(submitError instanceof Error ? submitError.message : 'Terjadi error, coba lagi.');
     }
   };
 
