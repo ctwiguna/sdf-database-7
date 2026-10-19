@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
+  Animated,
   Modal,
   Pressable,
   StyleSheet,
@@ -10,6 +11,8 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, radius, spacing } from '../../../theme';
+import { useDialogTransition } from '../../../lib/useDialogTransition';
+import { useReduceMotion } from '../../../lib/useReduceMotion';
 import { ModuleFormData } from '../types';
 
 type Props = {
@@ -51,6 +54,11 @@ export function ModuleFormModal({
     }
   }, [visible, initialData, defaultNextPosition]);
 
+  const { rendered, progress } = useDialogTransition(visible);
+  const reduceMotion = useReduceMotion();
+  const cardScale = reduceMotion ? null : { transform: [{ scale: progress.interpolate({ inputRange: [0, 1], outputRange: [0.96, 1] }) }] };
+
+
   const handleSubmit = async () => {
     const trimmedTitle = title.trim();
     if (!trimmedTitle) {
@@ -75,9 +83,9 @@ export function ModuleFormModal({
   const displayedError = localError || errorMessage;
 
   return (
-    <Modal visible={visible} transparent animationType="slide">
-      <View style={styles.backdrop}>
-        <View style={styles.card}>
+    <Modal visible={rendered} transparent animationType="none">
+      <Animated.View style={[styles.backdrop, { opacity: progress }]}>
+        <Animated.View style={[styles.card, cardScale]}>
           <View style={styles.header}>
             <Text style={styles.title}>
               {isEditing ? 'Ubah Modul' : 'Tambah Modul Baru'}
@@ -157,8 +165,8 @@ export function ModuleFormModal({
               )}
             </Pressable>
           </View>
-        </View>
-      </View>
+        </Animated.View>
+      </Animated.View>
     </Modal>
   );
 }

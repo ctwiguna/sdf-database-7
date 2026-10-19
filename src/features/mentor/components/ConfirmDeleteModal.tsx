@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ActivityIndicator,
+  Animated,
   Modal,
   Pressable,
   StyleSheet,
@@ -9,6 +10,8 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, radius, spacing } from '../../../theme';
+import { useDialogTransition } from '../../../lib/useDialogTransition';
+import { useReduceMotion } from '../../../lib/useReduceMotion';
 
 type Props = {
   visible: boolean;
@@ -29,10 +32,14 @@ export function ConfirmDeleteModal({
   onConfirm,
   onCancel,
 }: Props) {
+  const { rendered, progress } = useDialogTransition(visible);
+  const reduceMotion = useReduceMotion();
+  const cardScale = reduceMotion ? null : { transform: [{ scale: progress.interpolate({ inputRange: [0, 1], outputRange: [0.96, 1] }) }] };
+
   return (
-    <Modal visible={visible} transparent animationType="fade">
-      <View style={styles.backdrop}>
-        <View style={styles.card}>
+    <Modal visible={rendered} transparent animationType="none">
+      <Animated.View style={[styles.backdrop, { opacity: progress }]}>
+        <Animated.View style={[styles.card, cardScale]}>
           <View style={styles.header}>
             <View style={styles.iconCircle}>
               <Ionicons name="warning-outline" size={24} color={colors.error} />
@@ -73,8 +80,8 @@ export function ConfirmDeleteModal({
               )}
             </Pressable>
           </View>
-        </View>
-      </View>
+        </Animated.View>
+      </Animated.View>
     </Modal>
   );
 }
