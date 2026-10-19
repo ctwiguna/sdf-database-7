@@ -115,13 +115,13 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textSecondary,
     letterSpacing: 0.5,
   },
   title: {
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
     lineHeight: 22,
   },
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FDEEE6',
+    backgroundColor: colors.infoSurface,
     borderRadius: radius.button,
     height: 40,
     gap: spacing.xs,
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   addLessonText: {
     color: colors.action,
     fontSize: 13,
-    fontWeight: '700',
+    fontWeight: '500',
   },
   pressed: {
     opacity: 0.8,

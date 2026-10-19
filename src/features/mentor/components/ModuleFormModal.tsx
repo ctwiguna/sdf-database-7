@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
   },
   formGroup: {
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: '500',
     letterSpacing: 1,
     color: colors.textSecondary,
   },
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.xs,
-    backgroundColor: '#FDECEB',
+    backgroundColor: colors.errorSurface,
     padding: spacing.sm,
     borderRadius: radius.input / 2,
   },
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.xs,
-    backgroundColor: '#E6F4EA',
+    backgroundColor: colors.successSurface,
     padding: spacing.sm,
     borderRadius: radius.input / 2,
   },
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
   },
   cancelText: {
     color: colors.textPrimary,
-    fontWeight: '600',
+    fontWeight: '500',
     fontSize: 14,
   },
   submitButton: {
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
   },
   submitText: {
     color: colors.surface,
-    fontWeight: '700',
+    fontWeight: '500',
     fontSize: 14,
   },
   disabled: {

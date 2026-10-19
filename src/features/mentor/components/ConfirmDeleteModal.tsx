@@ -111,13 +111,13 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: radius.pill,
-    backgroundColor: '#FDECEB',
+    backgroundColor: colors.errorSurface,
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
     flex: 1,
   },
@@ -127,12 +127,12 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
   },
   cascadeWarning: {
     flexDirection: 'row',
-    backgroundColor: '#FFF4EE',
+    backgroundColor: colors.infoSurface,
     borderLeftWidth: 3,
     borderLeftColor: colors.action,
     padding: spacing.md,
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   },
   cancelText: {
     color: colors.textPrimary,
-    fontWeight: '600',
+    fontWeight: '500',
     fontSize: 14,
   },
   deleteButton: {
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   deleteText: {
     color: colors.surface,
-    fontWeight: '700',
+    fontWeight: '500',
     fontSize: 14,
   },
   disabled: {
