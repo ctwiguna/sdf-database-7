@@ -1,3 +1,5 @@
+import { Easing } from 'react-native';
+
 export const colors = {
   background: '#E7E7E7',
   surface: '#FFFFFF',
@@ -15,3 +17,14 @@ export const colors = {
 
 export const spacing = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32 } as const;
 export const radius = { card: 24, input: 16, button: 16, pill: 999 } as const;
+
+export const motion = {
+  duration: {
+    press: 120, // umpan balik saat kontrol ditekan
+    fast: 160, // pelepasan tekan, keluar toast, keluar modal
+    base: 200, // masuk toast, masuk kartu modal
+  },
+  easing: {
+    out: Easing.bezier(0.23, 1, 0.32, 1),
+  },
+} as const;
