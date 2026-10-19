@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
+  LayoutAnimation,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -9,6 +10,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, radius, spacing } from '../../../theme';
+import { useReduceMotion } from '../../../lib/useReduceMotion';
 import { ConfirmDeleteModal } from '../components/ConfirmDeleteModal';
 import { LessonFormModal } from '../components/LessonFormModal';
 import { ModuleFormModal } from '../components/ModuleFormModal';
@@ -67,6 +69,13 @@ export function MentorCourseDetailScreen({ client, courseId, onBack }: Props) {
     | null
   >(null);
   const [deleteBusy, setDeleteBusy] = useState(false);
+  const reduceMotion = useReduceMotion();
+
+  // Daftar modul dan materi dianimasikan saat berubah, kecuali reduce motion aktif.
+  const animateListChange = useCallback(() => {
+    if (reduceMotion) return;
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  }, [reduceMotion]);
 
   const loadCourse = useCallback(async () => {
     if (!client) {
@@ -130,6 +139,7 @@ export function MentorCourseDetailScreen({ client, courseId, onBack }: Props) {
       });
 
       setModuleSuccess(id ? 'Modul berhasil diperbarui.' : 'Modul baru berhasil ditambahkan.');
+      animateListChange();
       await loadCourse();
       setTimeout(() => {
         setModuleModalVisible(false);
@@ -180,6 +190,7 @@ export function MentorCourseDetailScreen({ client, courseId, onBack }: Props) {
       });
 
       setLessonSuccess(id ? 'Materi berhasil diperbarui.' : 'Materi baru berhasil ditambahkan.');
+      animateListChange();
       await loadCourse();
       setTimeout(() => {
         setLessonModalVisible(false);
@@ -207,6 +218,7 @@ export function MentorCourseDetailScreen({ client, courseId, onBack }: Props) {
         showToast(`Materi "${deleteTarget.lesson.title}" berhasil dihapus.`);
       }
       setDeleteTarget(null);
+      animateListChange();
       await loadCourse();
     } catch (err) {
       showToast(friendlyErrorMessage(err));
