@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: '500',
     color: colors.textSecondary,
   },
   statusBadge: {
@@ -116,26 +116,26 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   draftBadge: {
-    backgroundColor: '#FDEEE6',
+    backgroundColor: colors.infoSurface,
   },
   statusText: {
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: '500',
   },
   draftText: {
     color: colors.action,
   },
   publishedBadge: {
-    backgroundColor: '#E6F4EA',
+    backgroundColor: colors.successSurface,
   },
   publishedText: {
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.success,
   },
   title: {
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
     lineHeight: 22,
   },

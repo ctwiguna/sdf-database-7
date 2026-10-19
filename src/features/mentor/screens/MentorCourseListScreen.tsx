@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   },
   screenTitle: {
     fontSize: 22,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
   },
   mentorGreeting: {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
   },
   errorCard: {
-    backgroundColor: '#FDECEB',
+    backgroundColor: colors.errorSurface,
     borderRadius: radius.card,
     padding: spacing.xl,
     alignItems: 'center',
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
   },
   retryButtonText: {
     color: colors.textPrimary,
-    fontWeight: '700',
+    fontWeight: '500',
     fontSize: 13,
   },
   emptyCard: {
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   },
   emptyTitle: {
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
   },
   emptySubtitle: {
@@ -254,12 +254,12 @@ const styles = StyleSheet.create({
   },
   participantsText: {
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
   },
   stateTitle: {
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
     textAlign: 'center',
   },

@@ -473,7 +473,7 @@ const styles = StyleSheet.create({
   },
   navBackText: {
     fontSize: 14,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
   },
   iconReload: {
@@ -503,7 +503,7 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: '500',
     color: colors.textSecondary,
   },
   statusBadge: {
@@ -515,26 +515,26 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   draftBadge: {
-    backgroundColor: '#FDEEE6',
+    backgroundColor: colors.infoSurface,
   },
   statusText: {
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: '500',
   },
   draftText: {
     color: colors.action,
   },
   publishedBadge: {
-    backgroundColor: '#E6F4EA',
+    backgroundColor: colors.successSurface,
   },
   publishedText: {
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.success,
   },
   courseTitle: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
     lineHeight: 26,
   },
@@ -567,7 +567,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 17,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
   },
   addModuleButton: {
@@ -582,7 +582,7 @@ const styles = StyleSheet.create({
   addModuleText: {
     color: colors.surface,
     fontSize: 13,
-    fontWeight: '700',
+    fontWeight: '500',
   },
   modulesList: {
     gap: spacing.lg,
@@ -598,7 +598,7 @@ const styles = StyleSheet.create({
   },
   emptyTitle: {
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
   },
   emptySubtitle: {
@@ -619,14 +619,14 @@ const styles = StyleSheet.create({
   primaryActionText: {
     color: colors.surface,
     fontSize: 14,
-    fontWeight: '700',
+    fontWeight: '500',
   },
   toastContainer: {
     position: 'absolute',
     bottom: 24,
     left: spacing.lg,
     right: spacing.lg,
-    backgroundColor: '#1E1E1E',
+    backgroundColor: colors.textPrimary,
     borderRadius: radius.button,
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
@@ -642,12 +642,12 @@ const styles = StyleSheet.create({
   toastText: {
     color: colors.surface,
     fontSize: 13,
-    fontWeight: '600',
+    fontWeight: '500',
     flex: 1,
   },
   stateTitle: {
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
     textAlign: 'center',
   },
@@ -669,7 +669,7 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     color: colors.textPrimary,
-    fontWeight: '600',
+    fontWeight: '500',
     fontSize: 14,
   },
 });

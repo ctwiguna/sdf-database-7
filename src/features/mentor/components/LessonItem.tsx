@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   positionText: {
     fontSize: 12,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.textPrimary,
   },
   contentWrap: {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: '500',
     color: colors.textPrimary,
     lineHeight: 18,
   },
