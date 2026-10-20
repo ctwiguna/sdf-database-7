@@ -103,8 +103,13 @@ export const motion = {
     press: 120, // umpan balik saat kontrol ditekan
     fast: 160, // pelepasan tekan, keluar toast, keluar modal
     base: 200, // masuk toast, masuk kartu modal
+    slow: 640, // perakitan lockup pada layar sambutan
   },
   easing: {
     out: Easing.bezier(0.23, 1, 0.32, 1),
+    glide: Easing.bezier(0.215, 0.61, 0.355, 1), // power3.out dari film peluncuran
+  },
+  stagger: {
+    letter: 12, // jeda antar huruf wordmark dalam milidetik
   },
 } as const;
