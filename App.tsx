@@ -8,6 +8,8 @@ import { Course, Lesson, ProgressMap } from './src/types';
 import { colors, motion, palette, radius, shadow, spacing, typography } from './src/theme';
 import { useReduceMotion } from './src/lib/useReduceMotion';
 import { PressableScale } from './src/components/PressableScale';
+import { BrandWordmark } from './src/components/BrandMark';
+import { WelcomeScreen } from './src/components/WelcomeScreen';
 import { countCompleted, flattenLessons, nextLesson as pickNextLesson, progressPercent } from './src/lib/course';
 import { CatalogSource, enrollInCourse, loadCatalog, loadEnrollments, loadProgress, markLessonComplete } from './src/lib/catalog';
 import { SessionUser, signIn, signOut, signUp } from './src/lib/session';
@@ -47,6 +49,7 @@ function App() {
   const [sessionReady, setSessionReady] = useState(false);
   const [profile, setProfile] = useState<UserProfile>(DEFAULT_PROFILE);
   const [mentorCourse, setMentorCourse] = useState<MentorCourse | null>(null);
+  const [showWelcome, setShowWelcome] = useState(true);
 
   // Sesi pengguna dipasang sekali, lalu peran, enrollment dan progres dibaca dari database.
   const applySession = async (id: string, email: string) => {
@@ -217,7 +220,7 @@ function App() {
     <SafeAreaView style={styles.safe}>
       <StatusBar style="dark" />
       <View style={styles.header}>
-        <View><Text style={styles.brand}>Future Skill</Text><Text style={styles.subtitle}>Belajar skill masa depan</Text></View>
+        <View><BrandWordmark fontSize={16} /><Text style={styles.subtitle}>Belajar skill masa depan</Text></View>
         <View style={styles.avatar}><Ionicons name="person-outline" size={22} color={colors.textPrimary} /></View>
       </View>
       {screen === 'catalog' && <Catalog query={query} setQuery={setQuery} courses={courses} enrolled={enrolled} progress={progress} source={source} onOpen={openCourse} />}
@@ -232,6 +235,7 @@ function App() {
       {screen === 'adminReport' && <AdminReportScreen client={client as unknown as AdminRpcClient | null} onBack={() => setScreen('catalog')} />}
       {screen !== 'lesson' && <View style={styles.bottomNav}><NavItem icon="grid-outline" label="Katalog" active={screen === 'catalog'} onPress={() => setScreen('catalog')} /><NavItem icon="play-circle-outline" label="Kelas saya" active={screen === 'mine'} onPress={() => setScreen('mine')} />{profile.role === 'mentor' && <NavItem icon="create-outline" label="Kelola" active={screen === 'mentorCourses' || screen === 'mentorCourse' || screen === 'mentorParticipants'} onPress={() => setScreen('mentorCourses')} />}{profile.role === 'admin' && <NavItem icon="create-outline" label="Kelola" active={screen === 'adminCourse'} onPress={() => setScreen('adminCourse')} />}{profile.role === 'admin' && <NavItem icon="stats-chart-outline" label="Laporan" active={screen === 'adminReport'} onPress={() => setScreen('adminReport')} />}<NavItem icon="person-outline" label="Akun" active={screen === 'account'} onPress={() => setScreen('account')} /></View>}
       {toast && <Animated.View style={[toastStyles.toast, { opacity: toastProgress, transform: [{ translateY: toastTranslate }] }]}><Ionicons name="alert-circle-outline" size={18} color={colors.textPrimary} /><Text style={toastStyles.toastText}>{toast}</Text></Animated.View>}
+      {showWelcome && <WelcomeScreen onDone={() => setShowWelcome(false)} />}
     </SafeAreaView>
   );
 }
