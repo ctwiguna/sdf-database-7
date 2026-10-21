@@ -164,3 +164,6 @@ web-build/
 # Supabase CLI local state
 supabase/.branches/
 supabase/.temp/
+
+# hasil cek env
+.envcheck/
