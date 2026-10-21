@@ -36,6 +36,12 @@ export const friendlyAuthMessage = (message: string): string => {
   if (text.includes('invalid login credentials')) return 'Email atau kata sandi salah.';
   if (text.includes('email not confirmed')) return 'Email belum dikonfirmasi. Cek kotak masuk lalu masuk lagi.';
   if (text.includes('already registered') || text.includes('already been registered')) return 'Email ini sudah terdaftar. Coba masuk.';
+  // Domain email tanpa catatan DNS (mis. futureskill.id) ditolak Supabase sebelum dikirim.
+  if (text.includes('email_address_invalid') || text.includes('is invalid')) return 'Alamat email ditolak server. Gunakan email dengan domain yang aktif (mis. Gmail).';
+  // Batas kirim email bawaan Supabase mudah tercapai saat uji coba.
+  if (text.includes('over_email_send_rate_limit')) return 'Terlalu banyak email dikirim. Tunggu beberapa menit lalu coba lagi.';
+  if (text.includes('rate limit') || text.includes('too many')) return 'Terlalu banyak percobaan. Tunggu sebentar lalu coba lagi.';
+  if (text.includes('failed to fetch') || text.includes('network request failed')) return 'Tidak bisa menghubungi server. Periksa koneksi internet.';
   if (text.includes('password')) return 'Kata sandi ditolak. Gunakan minimal 6 karakter.';
   return message;
 };

@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "test": "jest --runInBand",
     "apk": "eas build -p android --profile preview",
-    "apk:local": "expo prebuild --platform android --no-install && cd android && ./gradlew assembleRelease"
+    "apk:local": "expo prebuild --platform android --no-install && cd android && ./gradlew assembleRelease",
+    "verify:env": "expo export --clear --platform android --output-dir .envcheck >/dev/null 2>&1 && B=$(ls .envcheck/_expo/static/js/android/*.hbc) && if strings $B | grep -qE '10\\.0\\.2\\.2|your-publishable-key'; then echo 'FATAL: env lokal/placeholder masih tertanam'; rm -rf .envcheck; exit 1; elif ! strings $B | grep -q 'supabase\\.co'; then echo 'FATAL: tidak ada URL Supabase, app akan mode demo'; rm -rf .envcheck; exit 1; else echo 'env OK: URL cloud tertanam'; rm -rf .envcheck; fi"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",

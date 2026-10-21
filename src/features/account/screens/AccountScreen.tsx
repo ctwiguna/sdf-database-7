@@ -45,10 +45,14 @@ export function AccountScreen({ databaseReady, userEmail, dataSource, notice, bu
     }
   };
 
+  // Host ditampilkan supaya saat uji di HP langsung terlihat APK menunjuk ke server mana.
+  const host = (process.env.EXPO_PUBLIC_SUPABASE_URL ?? '').replace(/^https?:\/\//, '');
+  const target = host ? ` (${host})` : '';
+
   const connectionText = () => {
     if (!databaseReady) return 'Mode demo lokal. Kredensial database belum diisi.';
-    if (dataSource === 'database') return 'Terhubung ke database Supabase.';
-    return `Data contoh dipakai sementara. ${notice ?? ''}`.trim();
+    if (dataSource === 'database') return `Terhubung ke database Supabase${target}.`;
+    return `Data contoh dipakai sementara${target}. ${notice ?? ''}`.trim();
   };
 
   return (
