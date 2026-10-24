@@ -27,19 +27,21 @@ Sesuai Product Requirements Document (PRD Bagian 7) dan kesepakatan kelompok:
 - [x] Katalog empat course, detail silabus, dan pemutar video YouTube WebView.
 - [x] Migration `lesson_progress` dan RPC `complete_lesson`.
 - [x] Test SQL `supabase/tests/lesson_progress.test.sql` (21 pemeriksaan lulus).
-- [x] Test unit logika urutan silabus dan progres belajar (7 test lulus).
-- [ ] Integrasi Supabase client dengan RPC database di React Native.
-- [ ] Build APK Android mandiri via EAS / local build.
+- [x] Test unit logika urutan silabus dan progres belajar (91 test lulus di 8 berkas).
+- [x] Integrasi Supabase client dengan RPC database di React Native (`enroll_course`, `complete_lesson`, `publish_course`, `admin_course_report`, `mentor_course_report`).
+- [x] Build APK Android mandiri via local build (`android/app/build/outputs/apk/release/app-release.apk`).
+- [x] Perbaikan sesi `SafeAreaView` agar header dan bottom navigation tidak bertabrakan dengan system bar Android.
+- [x] Ikon launcher dan nama aplikasi Future Skill.
 
 ## 4. Al Ghifary | `Arelll1204` (Fitur & Layar Mentor)
 - [x] Setup folder fitur mentor (`src/features/mentor/`).
-- [ ] Layar antarmuka mentor untuk kurasi modul/lesson dan pemantauan peserta.
-- [ ] Query RPC `mentor_course_report` dan `course_progress`.
-- [ ] Pengujian akses mentor, urutan silabus, dan isolasi progres lintas course.
+- [x] Layar antarmuka mentor untuk kurasi modul/lesson dan pemantauan peserta (`MentorCourseListScreen`, `MentorCourseDetailScreen`, `MentorParticipantsScreen`).
+- [x] Query RPC `mentor_course_report` dan `course_progress` (`src/features/mentor/lib/report.ts`).
+- [x] Pengujian akses mentor, urutan silabus, dan isolasi progres lintas course (`src/__tests__/mentor.test.ts`, `mentorReport.test.ts`).
 
 ## 5. NAWWAF | `AeternalSym` (Fitur Admin, QA & Deliverables)
-- [ ] Layar antarmuka admin untuk publikasi course dan laporan.
-- [ ] Query RPC `admin_course_report` dengan agregasi CTE.
-- [ ] Script benchmark index performa `lesson_progress(course_id, completed_at DESC)`.
+- [x] Layar antarmuka admin untuk publikasi course dan laporan (`AdminCourseScreen`, `AdminReportScreen`).
+- [x] Query RPC `admin_course_report` dengan agregasi CTE (`src/features/admin/lib/admin.ts`).
+- [x] Script benchmark index performa `lesson_progress(course_id, completed_at DESC)` (`scripts/benchmark_lesson_progress_index.sql`).
 - [ ] Penyusunan pitch deck startup format PDF (Problem, Solution, Monetisation).
 - [ ] Backup video demo aplikasi 2-3 menit.
