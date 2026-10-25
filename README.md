@@ -68,6 +68,6 @@ AI tools were used as writing and coding helpers. The team makes the product dec
 
 | Tool | Used by | For what |
 | :---- | :---- | :---- |
-| Hermes Agent (Nous Research), running the DeepSeek 4.1 and GLM 5.3 Flash models | Chandra | PRD drafting from version 1 to 6, database migrations and RPC design (enroll_course, complete_lesson, course_progress, mentor and admin reports), Jest and SQL test writing, commit and PR text, the animation audit, the design token application, the launcher icon and welcome screen, and this README |
+| Hermes Agent (Nous Research), with the DeepSeek 4.1 and GLM 5.3 Flash models | The team | Because the deadline and the iteration loop were very tight. PRD drafting from version 1 to 6, database migration and RPC design, unit test + integration test automation, Jest and SQL test writing, commit and PR text, the animation audit, the design token application, the launcher icon and welcome screen, and this README |
 
-Every AI assisted change was reviewed and tested by a team member before it was merged.
+Every AI assisted change is still reviewed and tested by team members before it is merged.
